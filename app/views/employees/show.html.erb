@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @employee.name %>
+</p>
+<td class="main">
+
+<td class="sidebar round">
+  <strong>Name</strong> <%= @employee.name %><br />
+  <strong>Duties</strong> <%= @employee.duties.count %>
+</td>
+
+<% if @employee.duties %>
+  <table class="duties" summary="Employee duties">
+    <%= render @duties %>
+  </table>
+  <%= will_paginate @duties %>
+<% end %>
+</tb>
+
+<%= form_for(@duty) do |f| %>
+  <div class="field">
+    <%= f.text_area :description %>
+    <%= DutiesController.set_employee @employee%>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>
+
+
+<%= link_to 'Edit', edit_employee_path(@employee) %> |
+<%= link_to 'Back', employees_path %>
