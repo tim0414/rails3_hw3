@@ -8,4 +8,8 @@ class CreateDuties < ActiveRecord::Migration
     end
     add_index :duties, :employee_id
   end
+
+  def self.down
+    drop_table :duties
+  end
 end

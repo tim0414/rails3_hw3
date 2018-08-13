@@ -1,17 +1,27 @@
 class DutiesController < ApplicationController
     
     def create
-
+        if @@employee.duties.build(params[:duty]).invalid?
+            #redirect_to :back
+            #return
+            respond_to do |format|
+                format.html { redirect_to :back, notice: 'Duty can not be empty.' }
+                format.json { head :no_content }
+            end
+            return
+        end
 
         @duty = @@employee.duties.build(params[:duty])
+       
         if @duty.save
             flash[:success] = "Duty created!"
             #redirect_to 'employee#index'
             DutiesController.set_employee(@@employee)
             redirect_to :back
         else
-            render 'employee#index'
+            render 'employees#index'
         end
+
 
     end
 
@@ -25,7 +35,7 @@ class DutiesController < ApplicationController
         @duty.destroy
 
         respond_to do |format|
-            format.html { redirect_to employees_url, notice: 'Duty was successfully destroyed.' }
+            format.html { redirect_to :back, notice: 'Duty was successfully destroyed.' }
             format.json { head :no_content }
         end
     end

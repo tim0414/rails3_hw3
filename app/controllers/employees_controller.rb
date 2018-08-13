@@ -75,6 +75,14 @@ class EmployeesController < ApplicationController
   # DELETE /employees/1.json
   def destroy
     @employee = Employee.find(params[:id])
+    #@employee.destroy
+    if @employee.duties != []
+      @employee.duties.each do |duty|
+        duty.destroy
+      end
+    end
+      
+    @employee = Employee.find(params[:id])
     @employee.destroy
 
     respond_to do |format|
