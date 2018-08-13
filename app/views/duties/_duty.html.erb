@@ -1,5 +1,6 @@
 <tr>
     <td class="duty">
         <span class="description"><%= duty.description %></span>
+        <td><%= button_to 'Delete', duty, method: :delete, data: { confirm: 'Are you sure?' }%></td>
     </td>
 </tr>

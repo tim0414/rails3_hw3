@@ -1,7 +1,7 @@
 Rails3Hw1::Application.routes.draw do
   resources :employees
   resources :duties, only: [:create, :destroy]
-  
+  #root 'employees/index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
